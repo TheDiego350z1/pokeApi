@@ -1,4 +1,13 @@
 
-<app-buscar></app-buscar>
+<app-buscar
+    (onEnter)="buscar( $event )"
+    placeholder="Buscar Pokemón..."
+></app-buscar>
 
+<div
+    *ngIf="hayError"
+    class="alert alert-danger"
+>
+    Lo sentimos {{ termino }} no es un Pokemón
+</div>
 <p>home works!</p>

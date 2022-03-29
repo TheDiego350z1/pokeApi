@@ -1,15 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Pokemon } from 'src/app/interfaces/pokemon.interface';
+
+import { PokeService } from 'src/app/services/poke.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent{
 
-  constructor() { }
+  hayError: boolean = false;
+  termino: string = '';
+  pokemon!: Pokemon;
 
-  ngOnInit(): void {
+  constructor(private pokeService: PokeService) { }
+
+  buscar(pokemon: string) {
+    this.hayError = false;
+    this.termino = pokemon; 
+
+    this.pokeService.buscarPokemon(this.termino)
+      .subscribe( (resp) => {
+        console.log(resp);
+      }, (err) => {
+        this.hayError = true;
+      });
   }
-
 }
